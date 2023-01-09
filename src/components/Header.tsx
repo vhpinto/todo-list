@@ -1,11 +1,12 @@
 import styles from './Header.module.css';
-import todoLogo from '../assets/todo-logo.svg'
+import { Rocket } from "phosphor-react";
 
 export function Header() {
     return (
         <header  className={styles.header}>
-            <div> todo </div>
-            {/* <img src={todoLogo} alt="Logotipo do todo"></img> */}
+            <Rocket size={36} />
+            <strong className={styles.to}> to </strong>
+            <strong className={styles.do}> do </strong>
         </header>
     );
 }
