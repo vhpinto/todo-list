@@ -7,7 +7,7 @@ export function AddTodoInput() {
         <div className={styles.addTodo}>
             <input 
                 type='text'
-                placeholder='Acicione uma nova tarefa'
+                placeholder='Adicione uma nova tarefa'
             >
 
             </input>
