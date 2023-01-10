@@ -1,0 +1,33 @@
+.todoList {
+    margin-top: 4rem;
+}
+
+.todoList header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tarefasCriadas {
+    color: var(--blue);
+    align-items: center;
+}
+
+.tarefasConcluidas {
+    color: var(--purple);
+    align-items: center;
+}
+
+
+.todoList header p {
+    font-weight: 700;
+    display: flex;
+}
+
+.todoList header p span {
+    background: var(--gray-400);
+    color: var(--gray-200);
+
+    padding: 0.5rem;
+    border-radius: 999px;
+    margin-left: 0.5rem;
+}
