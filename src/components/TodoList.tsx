@@ -1,4 +1,5 @@
 import { ClipboardText } from 'phosphor-react'
+import { Todo } from './Todo';
 
 import styles from './TodoList.module.css'
 
@@ -31,7 +32,7 @@ export function TodoList () {
                 
                     todoList.map((todo) => {
                         return (
-                            <p>{todo.description}</p>
+                            <Todo />
                         )
 
                     })
