@@ -3,6 +3,7 @@ import styles from './App.module.css'
 
 import './global.css'
 import { AddTodoInput } from './components/AddTodoInput'
+import { TodoList } from './components/TodoList'
 
 export function App() {
   return (
@@ -11,6 +12,7 @@ export function App() {
       <div className={styles.wrapper}>
         <main>
           <AddTodoInput />
+          <TodoList />
         </main>
       </div>
     </div>
