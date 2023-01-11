@@ -43,13 +43,21 @@ export function TodoList () {
         setTodoList(todoListWithoutDeletedOne);
     }
 
+    function arrayCount<T>(arr: T[], predicate: (elem: T, idx: number) => boolean) {
+        return arr.reduce((prev, curr, idx) => prev + (predicate(curr, idx) ? 1 : 0), 0)
+    }
+
+    const completedTasks = arrayCount(todoList, todo => todo.isDone);
+
+    const tasksCount = todoList.length;
+
     const isTodoListEmpty = todoList.length === 0 ? true : false;
 
     return (
         <div className={styles.todoList}>
             <header>
-                <p className={styles.tarefasCriadas}>Tarefas criadas <span> 0 </span></p>
-                <p className={styles.tarefasConcluidas}>Concluídas <span> 0 de 0 </span></p>
+                <p className={styles.tarefasCriadas}>Tarefas criadas <span> {tasksCount} </span></p>
+                <p className={styles.tarefasConcluidas}>Concluídas <span> {completedTasks} de {tasksCount} </span></p>
             </header>
                 { 
                     isTodoListEmpty && 
