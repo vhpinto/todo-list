@@ -17,7 +17,7 @@ export function Todo ({
                         onToggleIsDone,
                         onDeleteTask,
                       }:TodoProps) {
-                        
+
     function handlesToggleDone()
     {
         onToggleIsDone(id)
@@ -49,7 +49,7 @@ export function Todo ({
                     <Circle size={24}/>
                 </a>
             }
-            <span>{description}</span>
+            <span className={isDone ? styles.doneText : styles.notDoneText}>{description}</span>
             <button onClick={handlesDeleteTask}>
                 <Trash size={24} />
             </button>

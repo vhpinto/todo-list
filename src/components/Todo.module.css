@@ -1,6 +1,5 @@
 .todo {
     background: var(--gray-500);
-    color: var(--gray-100);
     border-radius: 8px;
     border: 1px solid var(--gray-400);
     padding: 1rem;
@@ -11,13 +10,24 @@
     margin-bottom: 0.75rem;
 }
 
-.notDone {
-    color: var(--blue);
+
+.notDoneText {
+    color: var(--gray-100);
+}
+
+.doneText {
+    color: var(--gray-300);
+    text-decoration: line-through;
 }
 
 .done {
     color: var(--purple-dark);
 }
+
+.notDone {
+    color: var(--blue);
+}
+
 
 .todo button {
     color: var(--gray-300);
