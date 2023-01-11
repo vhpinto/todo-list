@@ -1,6 +1,8 @@
 import { ClipboardText } from 'phosphor-react'
 import { useState } from 'react';
+import { AddTodoInput } from './AddTodoInput';
 import { Todo } from './Todo';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './TodoList.module.css'
 
@@ -11,18 +13,18 @@ interface Todo {
 }
 
 export function TodoList () {
-    const [ todoList, setTodoList ] = useState([
-        { 
-            id: '1',
-            description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-            isDone: false
-        },
-        { 
-            id: '2',
-            description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer 2.',
-            isDone: true
-        },
-    ]);
+    const [ todoList, setTodoList ] = useState(Array<Todo>);
+
+    function addTodoTask(description: string){
+        console.log(description)
+        const newTaskToAdd = {
+            id: uuidv4(),
+            description,
+            isDone: false,
+        }
+        
+        setTodoList([...todoList, newTaskToAdd])
+    }
 
     function toggleIsDone (id:string) {
         const todoListWithTaskToggled = todoList.map((todo) => {
@@ -54,37 +56,40 @@ export function TodoList () {
     const isTodoListEmpty = todoList.length === 0 ? true : false;
 
     return (
-        <div className={styles.todoList}>
-            <header>
-                <p className={styles.tarefasCriadas}>Tarefas criadas <span> {tasksCount} </span></p>
-                <p className={styles.tarefasConcluidas}>Concluídas <span> {completedTasks} de {tasksCount} </span></p>
-            </header>
-                { 
-                    isTodoListEmpty && 
-                
-                    <div className={styles.emptyList}>
-                        <ClipboardText size={56} />
-                        <strong>Você ainda não tem tarefas cadastradas</strong>
-                        <p>Crie tarefas e organize seus itens a fazer</p>
-                    </div>
-                }
-                { 
-                    !isTodoListEmpty && 
-                
-                    todoList.map((todo) => {
-                        return (
-                            <Todo 
-                                key={todo.id}
-                                id={todo.id}
-                                description={todo.description}
-                                isDone={todo.isDone}
-                                onToggleIsDone={toggleIsDone}
-                                onDeleteTask={deleteTask}
-                            />
-                        )
+        <div>
+            <AddTodoInput onAddTodo={addTodoTask}/>
+            <div className={styles.todoList}>
+                <header>
+                    <p className={styles.tarefasCriadas}>Tarefas criadas <span> {tasksCount} </span></p>
+                    <p className={styles.tarefasConcluidas}>Concluídas <span> {completedTasks} de {tasksCount} </span></p>
+                </header>
+                    { 
+                        isTodoListEmpty && 
+                    
+                        <div className={styles.emptyList}>
+                            <ClipboardText size={56} />
+                            <strong>Você ainda não tem tarefas cadastradas</strong>
+                            <p>Crie tarefas e organize seus itens a fazer</p>
+                        </div>
+                    }
+                    { 
+                        !isTodoListEmpty && 
+                    
+                        todoList.map((todo) => {
+                            return (
+                                <Todo 
+                                    key={todo.id}
+                                    id={todo.id}
+                                    description={todo.description}
+                                    isDone={todo.isDone}
+                                    onToggleIsDone={toggleIsDone}
+                                    onDeleteTask={deleteTask}
+                                />
+                            )
 
-                    })
-                }
+                        })
+                    }
+            </div>
         </div>
     )
 }
