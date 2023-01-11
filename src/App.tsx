@@ -11,7 +11,6 @@ export function App() {
       <Header />
       <div className={styles.wrapper}>
         <main>
-          <AddTodoInput />
           <TodoList />
         </main>
       </div>
