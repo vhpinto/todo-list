@@ -2,15 +2,55 @@ import { Circle, CheckCircle, Trash } from 'phosphor-react'
 
 import styles from './Todo.module.css'
 
-export function Todo () {
+export interface TodoProps {
+    id: string;
+    description: string;
+    isDone: boolean;
+    onToggleIsDone: (id: string) => void;
+    onDeleteTask: (id: string) => void;
+}
+
+export function Todo ({ 
+                        id,
+                        description,
+                        isDone,
+                        onToggleIsDone,
+                        onDeleteTask,
+                      }:TodoProps) {
+                        
+    function handlesToggleDone()
+    {
+        onToggleIsDone(id)
+    };
+
+    function handlesDeleteTask() {
+        onDeleteTask(id)
+    }
+
     return (
         <div className={styles.todo}>
-            <a href='#' className={styles.notChecked}><Circle size={24}/> </a>
-            {/* <a href='#' className={styles.checked}><CheckCircle size={24} weight='fill' /> </a> */}
-            
-            
-            <span>Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.</span>
-            <button>
+            {
+                isDone && 
+                <a 
+                    href='#' 
+                    className={styles.done}
+                    onClick={handlesToggleDone}
+                >
+                    <CheckCircle size={24} weight='fill' />
+                </a>
+            }
+            {
+                !isDone && 
+                <a 
+                    href='#'
+                    className={styles.notDone}
+                    onClick={handlesToggleDone}
+                >
+                    <Circle size={24}/>
+                </a>
+            }
+            <span>{description}</span>
+            <button onClick={handlesDeleteTask}>
                 <Trash size={24} />
             </button>
         </div>

@@ -1,22 +1,55 @@
 import { ClipboardText } from 'phosphor-react'
+import { useState } from 'react';
 import { Todo } from './Todo';
 
 import styles from './TodoList.module.css'
 
 interface Todo {
+    id: string,
     description: string;
+    isDone: boolean;
 }
 
-const todoList: Todo[] = [{description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'}];
-
 export function TodoList () {
+    const [ todoList, setTodoList ] = useState([
+        { 
+            id: '1',
+            description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
+            isDone: false
+        },
+        { 
+            id: '2',
+            description: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer 2.',
+            isDone: true
+        },
+    ]);
+
+    function toggleIsDone (id:string) {
+        const todoListWithTaskToggled = todoList.map((todo) => {
+            if (todo.id === id){
+                todo.isDone = !todo.isDone;
+            }
+            return todo;
+        });
+
+        setTodoList(todoListWithTaskToggled);
+    }
+
+    function deleteTask(id: string) {
+        const todoListWithoutDeletedOne = todoList.filter(todo =>{
+            return todo.id !== id;
+        });
+
+        setTodoList(todoListWithoutDeletedOne);
+    }
+
     const isTodoListEmpty = todoList.length === 0 ? true : false;
 
     return (
         <div className={styles.todoList}>
             <header>
                 <p className={styles.tarefasCriadas}>Tarefas criadas <span> 0 </span></p>
-                <p className={styles.tarefasConcluidas}>Concluídas <span> 0 </span></p>
+                <p className={styles.tarefasConcluidas}>Concluídas <span> 0 de 0 </span></p>
             </header>
                 { 
                     isTodoListEmpty && 
@@ -32,7 +65,14 @@ export function TodoList () {
                 
                     todoList.map((todo) => {
                         return (
-                            <Todo />
+                            <Todo 
+                                key={todo.id}
+                                id={todo.id}
+                                description={todo.description}
+                                isDone={todo.isDone}
+                                onToggleIsDone={toggleIsDone}
+                                onDeleteTask={deleteTask}
+                            />
                         )
 
                     })

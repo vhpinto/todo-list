@@ -11,11 +11,11 @@
     margin-bottom: 0.75rem;
 }
 
-.notChecked {
+.notDone {
     color: var(--blue);
 }
 
-.checked {
+.done {
     color: var(--purple-dark);
 }
 
